@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=SilkRoadContestCTest
+comment0.text=\r\n\ Clase\ com\u00FAn\ de\ pruebas\ colaborativas.\r\n\ Cada\ m\u00E9todo\ representa\ un\ caso\ colectivo\ propuesto\ en\ el\ wiki\ del\ grupo.\r\n
+comment1.params=
+comment1.target=void\ accordingCCShouldMaintainProfitBarVisible()
+comment1.text=\r\n\ accordingCCShouldMaintainProfitBarVisible\r\n\ Requisito\:\ la\ ganancia\ se\ muestra\ permanentemente\ sin\ texto\ num\u00E9rico.\r\n
+comment2.params=
+comment2.target=void\ accordingCCShouldDetectStoreEmpties()
+comment2.text=\r\n\ accordingCCShouldDetectStoreEmpties\r\n\ Requisito\ 12\:\ contar\ las\ tiendas\ desocupadas.\r\n
+comment3.params=
+comment3.target=void\ accordingCCShouldTrackRobotGains()
+comment3.text=\r\n\ accordingCCShouldTrackRobotGains\r\n\ Requisito\ 13\:\ debe\ registrar\ las\ ganancias\ por\ robot.\r\n
+comment4.params=
+comment4.target=void\ accordingCCShouldDifferentiateEmptyStores()
+comment4.text=\r\n\ accordingCCShouldDifferentiateEmptyStores\r\n\ Requisito\ visual\:\ las\ tiendas\ vac\u00EDas\ deben\ lucir\ distintas.\r\n\ Verificamos\ estado\ interno.\r\n
+comment5.params=
+comment5.target=void\ accordingCCShouldHighlightBestRobot()
+comment5.text=\r\n\ accordingCCShouldHighlightBestRobot\r\n\ Requisito\ visual\:\ el\ mejor\ robot\ debe\ parpadear.\r\n\ No\ verificamos\ la\ animaci\u00F3n,\ s\u00F3lo\ que\ el\ m\u00E9todo\ no\ falle.\r\n
+numComments=6

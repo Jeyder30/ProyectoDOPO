@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.target=Circle
+comment0.text=\r\n\ Un\ c\u00EDrculo\ que\ se\ puede\ manipular\ y\ dibuja\ en\ el\ Canvas.\r\n
+comment1.params=
+comment1.target=Circle()
+comment10.params=time
+comment10.target=void\ discoTime(int)
+comment2.params=area
+comment2.target=Circle(double)
+comment3.params=
+comment3.target=void\ draw()
+comment4.params=
+comment4.target=void\ erase()
+comment5.params=newDiameter
+comment5.target=void\ changeSize(int)
+comment6.params=newColor
+comment6.target=void\ changeColor(java.lang.String)
+comment7.params=
+comment7.target=double\ area()
+comment8.params=percentage
+comment8.target=void\ bigger(int)
+comment9.params=times\ areaF
+comment9.target=void\ shrink(int,\ int)
+numComments=11

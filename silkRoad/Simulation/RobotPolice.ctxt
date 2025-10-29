@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=RobotPolice
+comment0.text=\r\n\ RobotPolice\ \u2014\ recorre\ el\ tablero\ en\ busca\ de\ robots\ con\ tenges\ negativos.\r\n\ Si\ encuentra\ alguno,\ lo\ elimina\ del\ tablero.\r\n\ Tiene\ 1000\ tenges\ iniciales\ para\ moverse\ libremente.\r\n
+comment1.params=location\ color
+comment1.target=RobotPolice(int,\ java.lang.String)
+comment2.params=road
+comment2.target=void\ patrol(SilkRoad)
+comment2.text=\r\n\ Patrulla\ el\ tablero\ buscando\ robots\ con\ tenges\ negativos.\r\n\ Si\ los\ encuentra,\ los\ elimina\ visualmente.\r\n
+comment3.params=road
+comment3.target=void\ patrolMove(SilkRoad)
+comment3.text=\r\n\ Mueve\ el\ robot\ police\ por\ el\ tablero\ (puede\ cruzar\ libremente).\r\n
+comment4.params=
+comment4.target=java.lang.String\ toString()
+numComments=5

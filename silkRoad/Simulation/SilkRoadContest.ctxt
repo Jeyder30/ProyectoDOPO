@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=SilkRoadContest
+comment0.text=\r\n\ Clase\ SilkRoadContest\ \u2014\ Controlador\ principal\ de\ la\ simulaci\u00F3n\ y\ resoluci\u00F3n.\r\n\r\n\ Esta\ clase\ coordina\ el\ flujo\ de\ la\ marat\u00F3n\:\r\n\ -\ Usa\ SilkRoad\ solo\ para\ simular\ visualmente\ (nunca\ para\ calcular\ el\ resultado).\r\n\r\n\ REQUISITOS\:\r\n\ (14)\ Resolver\ el\ problema\ de\ la\ marat\u00F3n\ calculando\ la\ ganancia\ \u00F3ptima\ diaria.\r\n\ (15)\ Simular\ paso\ a\ paso\ los\ movimientos\ de\ los\ robots\ sobre\ la\ ruta\ de\ seda.\r\n
+comment1.params=
+comment1.target=SilkRoadContest()
+comment1.text=Crea\ una\ simulaci\u00F3n\ con\ una\ ruta\ de\ longitud\ por\ defecto\ (1000).
+comment2.params=days
+comment2.target=SilkRoadContest(int[][])
+comment2.text=Crea\ una\ simulaci\u00F3n\ con\ una\ ruta\ adaptada\ a\ los\ datos\ de\ entrada.
+comment3.params=days
+comment3.target=int[]\ solve(int[][])
+comment3.text=\r\n\ Calcula\ la\ ganancia\ \u00F3ptima\ acumulada\ d\u00EDa\ por\ d\u00EDa\ sin\ usar\ la\ simulaci\u00F3n.\r\n
+comment4.params=days\ slow
+comment4.target=void\ simulate(int[][],\ boolean)
+comment4.text=\r\n\ Simula\ d\u00EDa\ a\ d\u00EDa\ los\ movimientos\ de\ robots\ y\ tiendas\ usando\ SilkRoad.\r\n\ No\ calcula\ resultados,\ solo\ visualiza\ el\ estado\ progresivo.\r\n
+comment5.params=code
+comment5.target=java.lang.String\ decodeRobotType(int)
+comment5.text=\r\n\ Convierte\ un\ entero\ o\ c\u00F3digo\ corto\ en\ tipo\ de\ robot.\r\n\ Puedes\ ajustar\ esto\ seg\u00FAn\ tu\ formato\ de\ entrada.\r\n
+comment6.params=code
+comment6.target=java.lang.String\ decodeStoreType(int)
+comment6.text=\r\n\ Convierte\ un\ entero\ o\ c\u00F3digo\ corto\ en\ tipo\ de\ tienda.\r\n
+comment7.params=robots\ storePos\ pref
+comment7.target=int\ computeMaxProfitDP(int[],\ int[],\ long[])
+comment7.text=\r\n\ C\u00E1lculo\ interno\ del\ m\u00E1ximo\ beneficio.\r\n
+numComments=8

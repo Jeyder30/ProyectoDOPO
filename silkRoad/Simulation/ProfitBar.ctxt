@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=ProfitBar
+comment0.text=\r\n\ ProfitBar\:\ barra\ de\ progreso\ visual\ que\ muestra\ permanentemente\r\n\ la\ ganancia\ acumulada\ del\ d\u00EDa.\r\n\r\n\ Cumple\ con\ el\ requisito\:\r\n\ \ -\ La\ ganancia\ se\ muestra\ como\ una\ barra\ de\ progreso\r\n\ \ -\ El\ m\u00E1ximo\ representa\ la\ ganancia\ m\u00E1xima\ posible\r\n\ \ -\ No\ muestra\ n\u00FAmeros\ ni\ texto\ adicional\r\n
+comment1.params=maxProfit
+comment1.target=ProfitBar(int)
+comment2.params=profit
+comment2.target=void\ updateProfit(int)
+comment2.text=Actualiza\ la\ ganancia\ mostrada
+comment3.params=maxProfit
+comment3.target=void\ setMaxProfit(int)
+comment3.text=Cambia\ el\ m\u00E1ximo\ de\ ganancias\ posibles
+comment4.params=
+comment4.target=void\ reset()
+comment4.text=Resetea\ la\ barra\ de\ progreso\ a\ cero
+comment5.params=
+comment5.target=void\ close()
+comment5.text=Cierra\ la\ barra\ si\ ya\ no\ es\ necesaria
+numComments=6

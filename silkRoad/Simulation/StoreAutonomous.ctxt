@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=StoreAutonomous
+comment1.params=location\ tenges\ color
+comment1.target=StoreAutonomous(int,\ int,\ java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ toString()
+numComments=3

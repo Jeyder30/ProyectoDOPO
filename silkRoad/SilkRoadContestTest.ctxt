@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=SilkRoadContestTest
+comment0.text=\r\n\ Pruebas\ de\ unidad\ para\ SilkRoadContest\ (actualizado).\r\n\r\n\ Cubre\ los\ m\u00E9todos\ solve()\ y\ simulate()\ seg\u00FAn\ los\ requisitos\:\r\n\ 14.\ Debe\ solucionar\ el\ problema\ de\ la\ marat\u00F3n.\r\n\ 15.\ Debe\ simular\ la\ soluci\u00F3n.\r\n
+comment1.params=
+comment1.target=void\ accordingSSShouldSolveSimpleCaseCorrectly()
+comment1.text=\r\n\ accordingSSShouldSolveSimpleCaseCorrectly\r\n\ Requisito\ 14\:\ calcular\ ganancia\ \u00F3ptima\ en\ un\ caso\ simple.\r\n
+comment2.params=
+comment2.target=void\ accordingSSShouldHandleMultipleRobotsAndStores()
+comment2.text=\r\n\ accordingSSShouldHandleMultipleRobotsAndStores\r\n\ Requisito\ 14\:\ debe\ combinar\ robots\ y\ tiendas\ para\ m\u00E1xima\ ganancia.\r\n
+comment3.params=
+comment3.target=void\ accordingSSShouldSimulateWithoutErrors()
+comment3.text=\r\n\ accordingSSShouldSimulateWithoutErrors\r\n\ Requisito\ 15\:\ simulate()\ debe\ ejecutarse\ sin\ errores.\r\n
+comment4.params=
+comment4.target=void\ accordingSSShouldReturnZeroWhenNoEvents()
+comment4.text=\r\n\ accordingSSShouldReturnZeroWhenNoEvents\r\n\ Requisito\ 14\:\ entrada\ vac\u00EDa\ debe\ retornar\ sin\ ganancias.\r\n
+comment5.params=
+comment5.target=void\ accordingSSShouldIgnoreInvalidEvents()
+comment5.text=\r\n\ accordingSSShouldIgnoreInvalidEvents\r\n\ Requisito\ 14\ y\ 15\:\ debe\ ser\ robusto\ ante\ entradas\ inv\u00E1lidas.\r\n
+numComments=6

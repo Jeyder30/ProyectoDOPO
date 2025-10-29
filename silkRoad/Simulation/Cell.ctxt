@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.target=Cell
+comment0.text=\r\n\ Representa\ una\ celda\ en\ la\ ruta\ de\ SilkRoad.\r\n\ Puede\ estar\ vac\u00EDa,\ contener\ una\ tienda\ o\ un\ robot.\r\n
+comment1.params=x\ y\ size
+comment1.target=Cell(int,\ int,\ int)
+comment2.params=color
+comment2.target=void\ placeRobot(java.lang.String)
+comment2.text=Coloca\ un\ robot\ en\ el\ centro\ de\ la\ celda
+comment3.params=color
+comment3.target=void\ placeStore(java.lang.String)
+comment3.text=Coloca\ una\ tienda\ en\ el\ centro\ de\ la\ celda
+comment4.params=
+comment4.target=void\ clear()
+comment4.text=Limpia\ la\ celda\ (vuelve\ a\ vac\u00EDa)
+comment5.params=
+comment5.target=void\ makeVisible()
+comment5.text=Hace\ visible\ la\ celda
+comment6.params=
+comment6.target=void\ makeInvisible()
+comment6.text=Hace\ invisible\ la\ celda
+comment7.params=
+comment7.target=int\ getX()
+comment8.params=
+comment8.target=int\ getY()
+comment9.params=
+comment9.target=int\ getSize()
+numComments=10

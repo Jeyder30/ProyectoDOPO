@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=RouteBuilder
+comment0.text=\r\n\ Construye\ un\ recorrido\ en\ espiral\ dentro\ de\ una\ cuadr\u00EDcula.\r\n
+comment1.params=gridSize\ cellSize\ startX\ startY
+comment1.target=java.util.List\ buildSpiralInGrid(int,\ int,\ int,\ int)
+comment1.text=\r\n\ Construye\ un\ recorrido\ en\ espiral\ dentro\ de\ una\ cuadr\u00EDcula.\r\n\ @param\ gridSize\ tama\u00F1o\ de\ la\ cuadr\u00EDcula\ (ej\:\ 15\ \u2192\ 15x15)\r\n\ @param\ cellSize\ tama\u00F1o\ de\ cada\ celda\ en\ pantalla\r\n\ @param\ startX\ coordenada\ X\ inicial\ en\ pantalla\r\n\ @param\ startY\ coordenada\ Y\ inicial\ en\ pantalla\r\n\ @return\ lista\ de\ celdas\ en\ orden\ espiral\r\n
+numComments=2

@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=Rectangle
+comment0.text=\r\n\ Un\ rect\u00E1ngulo\ que\ se\ puede\ manipular\ y\ dibuja\ en\ el\ Canvas.\r\n
+comment1.params=
+comment1.target=Rectangle()
+comment2.params=
+comment2.target=void\ draw()
+comment3.params=
+comment3.target=void\ erase()
+comment4.params=newHeight\ newWidth
+comment4.target=void\ changeSize(int,\ int)
+comment5.params=newColor
+comment5.target=void\ changeColor(java.lang.String)
+numComments=6

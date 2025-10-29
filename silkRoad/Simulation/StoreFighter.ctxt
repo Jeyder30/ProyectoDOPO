@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=StoreFighter
+comment1.params=location\ tenges\ color
+comment1.target=StoreFighter(int,\ int,\ java.lang.String)
+comment2.params=robot\ distance
+comment2.target=int\ interactWithRobot(Robot,\ int)
+comment2.text=\r\n\ Entrega\ el\ dinero\ solo\ si\ el\ robot\ tiene\ m\u00E1s\ que\ la\ tienda.\r\n\ Si\ no,\ la\ tienda\ se\ defiende\ y\ el\ robot\ pierde\ su\ movimiento.\r\n
+comment3.params=
+comment3.target=java.lang.String\ toString()
+numComments=4

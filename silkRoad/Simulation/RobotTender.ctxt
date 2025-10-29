@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=RobotTender
+comment1.params=location\ color
+comment1.target=RobotTender(int,\ java.lang.String)
+comment2.params=store\ distance
+comment2.target=int\ interactWithStore(Store,\ int)
+comment3.params=
+comment3.target=java.lang.String\ toString()
+numComments=4

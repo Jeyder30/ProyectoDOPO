@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=RobotNeverBack
+comment1.params=location\ color
+comment1.target=RobotNeverBack(int,\ java.lang.String)
+comment2.params=meters
+comment2.target=void\ move(int)
+comment3.params=
+comment3.target=java.lang.String\ toString()
+numComments=4

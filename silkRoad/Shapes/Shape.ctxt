@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Shape
+comment1.params=
+comment1.target=void\ makeVisible()
+comment2.params=
+comment2.target=void\ makeInvisible()
+comment3.params=
+comment3.target=void\ draw()
+comment4.params=
+comment4.target=void\ erase()
+comment5.params=distance
+comment5.target=void\ moveHorizontal(int)
+comment6.params=distance
+comment6.target=void\ moveVertical(int)
+comment7.params=newX\ newY
+comment7.target=void\ setAbsolutePosition(int,\ int)
+numComments=8
