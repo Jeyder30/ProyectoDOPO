@@ -36,6 +36,10 @@ public class SilkRoad {
     private ProfitBar profitBar;
     private Cell[] cells;
     private int cellSize = 30;
+    
+    private RobotPolice police;  // Robot policía único
+    private boolean policeActive = false;
+
 
     /**
      * Crea una nueva ruta de seda con una longitud fija.
@@ -78,70 +82,69 @@ public class SilkRoad {
     }
 
     /** Coloca una tienda en la ubicación indicada. */
-    public void placeStore(int location, int tenges, String type) {
-        if (location < 0 || location >= length) return;
-        if (stores.containsKey(location)) return;
+    public void placeStore(int position, int tenges, String type) {
+        if (position < 0 || position >= cells.length) return;
     
-        String color = storeColors.nextColor();
-        Store s;
+        Store store;
+        String color;
     
         switch (type.toLowerCase()) {
             case "autonomous":
-                s = new StoreAutonomous(location, tenges, color);
+                color = "yellow";
+                store = new StoreAutonomous(position, tenges, color);
                 break;
+    
             case "fighter":
-                s = new StoreFighter(location, tenges, color);
+                color = "red";
+                store = new StoreFighter(position, tenges, color);
                 break;
+    
             default:
-                s = new Store(location, tenges, color);
+                color = "purple";
+                store = new Store(position, tenges, color);
                 break;
         }
     
-        stores.put(location, s);
-    
-        if (!initialStoreTenges.containsKey(location)) {
-            initialStoreTenges.put(location, tenges);
-            initialStoreColors.put(location, color);
-        }
-    
-        if (cells[location] != null) {
-            s.placeInCell(cells[location]);
-            s.makeVisible();
-        }
-        actualizarMaxProfit();
+        store.placeInCell(cells[position]);
+        store.makeVisible();
+        stores.put(position, store);
     }
 
+
     /** Coloca un robot en la ubicación indicada. */
-    public void placeRobot(int location, String type) {
-        if (location < 0 || location >= length) return;
-        if (robots.containsKey(location)) return;
+    public void placeRobot(int position, String type) {
+        if (position < 0 || position >= cells.length) return;
     
-        String color = robotColors.nextColor();
-        Robot r;
+        Robot robot;
+        String color;
     
         switch (type.toLowerCase()) {
             case "neverback":
-                r = new RobotNeverBack(location, color);
+                color = "orange";
+                robot = new RobotNeverBack(position, color);
                 break;
+    
             case "tender":
-                r = new RobotTender(location, color);
+                color = "green";
+                robot = new RobotTender(position, color);
                 break;
+    
+            case "police":
+                color = "cyan";
+                robot = new RobotPolice(position, color);
+                break;
+    
             default:
-                r = new Robot(location, color);
+                color = "blue";
+                robot = new Robot(position, color);
                 break;
         }
     
-        robots.put(location, r);
-    
-        if (!initialRobotColors.containsKey(location)) {
-            initialRobotColors.put(location, color);
-        }
-    
-        if (cells[location] != null) {
-            r.placeInCell(cells[location]);
-            r.makeVisible();
-        }
+        robot.placeInCell(cells[position]);
+        robot.makeVisible();
+        robots.put(position, robot);
     }
+
     /** Elimina una tienda existente. */
     public void removeStore(int location) {
         Store s = stores.remove(location);
@@ -308,14 +311,48 @@ public class SilkRoad {
     }
 
     public void makeVisible() {
-        if (!visible) visible = true;
-        for (Cell c : cells) if (c != null) c.makeVisible();
+        // Primero las celdas (fondo)
+        for (Cell cell : cells) {
+            if (cell != null) cell.makeVisible();
+        }
+    
+        // Luego las tiendas
+        for (Store store : stores.values()) {
+            if (store != null) {
+                store.makeVisible();
+            }
+        }
+    
+        // Finalmente los robots
+        for (Robot robot : robots.values()) {
+            if (robot != null) {
+                robot.makeVisible();
+            }
+        }
     }
 
+
     public void makeInvisible() {
-        if (visible) visible = false;
-        for (Cell c : cells) if (c != null) c.makeInvisible();
+        // Primero los robots (para que desaparezcan encima)
+        for (Robot robot : robots.values()) {
+            if (robot != null) {
+                robot.makeInvisible();
+            }
+        }
+    
+        // Luego las tiendas
+        for (Store store : stores.values()) {
+            if (store != null) {
+                store.makeInvisible();
+            }
+        }
+    
+        // Finalmente las celdas
+        for (Cell cell : cells) {
+            if (cell != null) cell.makeInvisible();
+        }
     }
+
 
     public int[][] stores() {
         List<Integer> locs = new ArrayList<>(stores.keySet());
@@ -379,6 +416,36 @@ public class SilkRoad {
      */
     public Cell[] getCells() {
         return cells;
+    }
+    
+    /**
+     * Activa un RobotPolice en la ruta.
+     * Por defecto inicia en la celda 0 y se hace visible.
+     */
+    public void activatePolice() {
+        if (policeActive) return;
+        police = new RobotPolice(0, "cyan");
+        police.placeInCell(cells[0]);
+        police.makeVisible();
+        policeActive = true;
+    }
+
+    /**
+     * Hace que el robot policial se mueva y patrulle.
+     * Si encuentra robots con tenges negativos en su misma posición, los elimina.
+     */
+    public void policePatrol() {
+        if (!policeActive || police == null) return;
+        police.patrolMove(this);  // se mueve aleatoriamente
+        police.patrol(this);      // busca y elimina robots negativos
+    }
+    
+    /**
+     * Devuelve cuántos robots ha eliminado el robot policial.
+     */
+    public int getRobotsRemovedByPolice() {
+        if (police == null) return 0;
+        return police.getRobotsRemoved();
     }
 
 }

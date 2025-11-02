@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=SilkRoadContestCTest
+comment0.text=\r\n\ Clase\ com\u00FAn\ de\ pruebas\ colaborativas\ usando\ las\ clases\ reales\ del\ proyecto.\r\n
+comment1.params=
+comment1.target=void\ accordingCCShouldMaintainProfitBarVisible()
+comment2.params=
+comment2.target=void\ accordingCCShouldDetectStoreEmpties()
+comment3.params=
+comment3.target=void\ accordingCCShouldTrackRobotGains()
+comment4.params=
+comment4.target=void\ accordingCCShouldDifferentiateEmptyStores()
+comment5.params=
+comment5.target=void\ accordingCCShouldHighlightBestRobot()
+numComments=6

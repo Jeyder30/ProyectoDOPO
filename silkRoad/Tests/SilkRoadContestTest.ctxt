@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=SilkRoadContestTest
+comment0.text=\r\n\ Pruebas\ de\ unidad\ para\ SilkRoadContest\ (versi\u00F3n\ compatible\ con\ tu\ implementaci\u00F3n).\r\n
+comment1.params=
+comment1.target=void\ accordingSSShouldSolveSimpleCaseCorrectly()
+comment2.params=
+comment2.target=void\ accordingSSShouldHandleMultipleRobotsAndStores()
+comment3.params=
+comment3.target=void\ accordingSSShouldSimulateWithoutErrors()
+comment4.params=
+comment4.target=void\ accordingSSShouldReturnZeroWhenNoEvents()
+comment5.params=
+comment5.target=void\ accordingSSShouldIgnoreInvalidEvents()
+numComments=6

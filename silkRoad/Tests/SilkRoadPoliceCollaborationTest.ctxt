@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=SilkRoadPoliceCollaborationTest
+comment0.text=\r\n\ Pruebas\ colaborativas\ del\ RobotPolice\ en\ el\ contexto\ de\ SilkRoad.\r\n
+comment1.params=
+comment1.target=void\ policeShouldRemoveRobotsWithNegativeTenges()
+comment2.params=
+comment2.target=void\ policeShouldCountRemovedRobots()
+numComments=3

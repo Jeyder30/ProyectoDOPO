@@ -208,7 +208,6 @@ public class Robot {
         if (shape != null) shape.discoTime(100);
     }
 
-    // Getters para shapes (útil en tests)
     public Circle getBodyShape() { return shape; }
     public Circle getEyeLeftShape() { return eyeLeft; }
     public Circle getEyeRightShape() { return eyeRight; }

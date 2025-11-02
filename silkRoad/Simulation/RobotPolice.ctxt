@@ -1,14 +1,19 @@
 #BlueJ class context
 comment0.target=RobotPolice
-comment0.text=\r\n\ RobotPolice\ \u2014\ recorre\ el\ tablero\ en\ busca\ de\ robots\ con\ tenges\ negativos.\r\n\ Si\ encuentra\ alguno,\ lo\ elimina\ del\ tablero.\r\n\ Tiene\ 1000\ tenges\ iniciales\ para\ moverse\ libremente.\r\n
+comment0.text=\r\n\ RobotPolice\ \u2014\ patrulla\ la\ ruta\ de\ seda\ buscando\ robots\ con\ tenges\ negativos.\r\n\ Si\ encuentra\ alguno\ en\ su\ misma\ posici\u00F3n,\ lo\ elimina.\r\n\ \r\n\ Tiene\ 1000\ tenges\ iniciales\ y\ puede\ moverse\ libremente\ por\ el\ mapa.\r\n
 comment1.params=location\ color
 comment1.target=RobotPolice(int,\ java.lang.String)
 comment2.params=road
 comment2.target=void\ patrol(SilkRoad)
-comment2.text=\r\n\ Patrulla\ el\ tablero\ buscando\ robots\ con\ tenges\ negativos.\r\n\ Si\ los\ encuentra,\ los\ elimina\ visualmente.\r\n
+comment2.text=\r\n\ Patrulla\ el\ tablero\ buscando\ robots\ con\ tenges\ negativos\ en\ su\ misma\ celda.\r\n\ Si\ los\ encuentra,\ los\ elimina\ del\ tablero\ y\ actualiza\ su\ contador.\r\n
 comment3.params=road
 comment3.target=void\ patrolMove(SilkRoad)
-comment3.text=\r\n\ Mueve\ el\ robot\ police\ por\ el\ tablero\ (puede\ cruzar\ libremente).\r\n
+comment3.text=\r\n\ Mueve\ el\ robot\ policial\ a\ una\ nueva\ posici\u00F3n\ aleatoria\ dentro\ del\ rango\ definido.\r\n\ El\ movimiento\ es\ libre\:\ no\ se\ penaliza\ ni\ restringe.\r\n
 comment4.params=
-comment4.target=java.lang.String\ toString()
-numComments=5
+comment4.target=int\ getRobotsRemoved()
+comment4.text=\r\n\ Devuelve\ cu\u00E1ntos\ robots\ ha\ eliminado\ el\ RobotPolice.\r\n
+comment5.params=
+comment5.target=java.lang.String\ toString()
+comment6.params=cell
+comment6.target=void\ placeInCell(Cell)
+numComments=7
