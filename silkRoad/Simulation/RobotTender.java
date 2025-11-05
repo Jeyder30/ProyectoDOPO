@@ -1,24 +1,42 @@
 package Simulation;
 
+import Shapes.*;
+
 public class RobotTender extends Robot {
 
-    public RobotTender(int location, String color) {
-        super(location, color);
+    public RobotTender(int position, String color) {
+        super(position, color);
     }
 
+    /**
+     * El RobotTender toma solo la mitad de los tenges disponibles en la tienda.
+     * La tienda conserva la otra mitad 
+     * 
+     * @param store     La tienda con la que interactúa.
+     * @param distance  La distancia recorrida para llegar a la tienda.
+     * @return          La ganancia obtenida.
+     */
     public int interactWithStore(Store store, int distance) {
-        if (store.getCurrentTenges() <= 0) return -distance;
-        int half = store.getCurrentTenges() / 2;
-        int gain = half - distance;
+        if (store == null) return -distance;
 
-        store.empty();
-        addProfit(gain, store.getLocation(), distance);
-        addTenges(half);
+        int currentTenges = store.getCurrentTenges();
+        if (currentTenges <= 0) return -distance;
+
+        // Toma la mitad de las monedas de la tienda
+        int halfTenges = currentTenges / 2;
+
+        // La tienda se queda con la otra mitad
+        store.reduceTengesByHalf();
+
+        // Calcula la ganancia (toma de la tienda - costo por distancia)
+        int gain = halfTenges - distance;
+
+        // Actualiza los tenges y la ganancia del robot
+        this.addTenges(halfTenges);
+        this.addProfit(gain, store.getLocation(), distance);
+
         return gain;
     }
-
-    @Override
-    public String toString() {
-        return "RobotTender{loc=" + getCurrentLocation() + ", profit=" + getProfit() + "}";
-    }
+    
+    
 }

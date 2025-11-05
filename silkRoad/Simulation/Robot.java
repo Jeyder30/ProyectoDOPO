@@ -217,4 +217,9 @@ public class Robot {
     public String toString() {
         return "Robot{loc=" + currentLocation + ", profit=" + profit + "}";
     }
+    
+    public void onPlaced(SilkRoad road) {}
+    
+    public void onRemoved() {}
+
 }

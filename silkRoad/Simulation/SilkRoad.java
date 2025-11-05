@@ -1,4 +1,3 @@
-
 package Simulation;
 
 import Shapes.*;  
@@ -83,24 +82,37 @@ public class SilkRoad {
 
     /** Coloca una tienda en la ubicación indicada. */
     public void placeStore(int position, int tenges, String type) {
+        // Si la posición está fuera del rango, se ignora
         if (position < 0 || position >= cells.length) return;
+    
+        // Si la tienda es autónoma, elige una posición aleatoria válida
+        if (type.equalsIgnoreCase("autonomous")) {
+            Random rand = new Random();
+            position = rand.nextInt(cells.length); // cambia la posición de forma aleatoria
+        }
+    
+        // Si ya hay algo en esa celda, se limpia
+        if (cells[position] != null) {
+            cells[position].clear();
+            cells[position].makeVisible();
+        }
     
         Store store;
         String color;
     
         switch (type.toLowerCase()) {
-            case "autonomous":
-                color = "yellow";
-                store = new StoreAutonomous(position, tenges, color);
-                break;
-    
             case "fighter":
                 color = "red";
                 store = new StoreFighter(position, tenges, color);
                 break;
     
+            case "autonomous":
+                color = "yellow";
+                store = new StoreAutonomous(position, tenges, color);
+                break;
+    
             default:
-                color = "purple";
+                color = "magenta";
                 store = new Store(position, tenges, color);
                 break;
         }
@@ -109,7 +121,6 @@ public class SilkRoad {
         store.makeVisible();
         stores.put(position, store);
     }
-
 
     /** Coloca un robot en la ubicación indicada. */
     public void placeRobot(int position, String type) {
@@ -132,6 +143,9 @@ public class SilkRoad {
             case "police":
                 color = "cyan";
                 robot = new RobotPolice(position, color);
+                // registrar la referencia al policía para usarla sin instanceof
+                police = (RobotPolice) robot;
+                policeActive = true;
                 break;
     
             default:
@@ -159,10 +173,14 @@ public class SilkRoad {
     public void removeRobot(int location) {
         Robot r = robots.remove(location);
         if (r != null) {
+            // Si se está eliminando al policía, limpiar su referencia
+            if (r == police) {
+                police = null;
+                policeActive = false;
+            }
             r.makeInvisible();
             if (cells[location] != null) {
                 cells[location].clear();
-                cells[location].placeStore("white");
                 cells[location].makeVisible();
             }
         }
@@ -182,10 +200,12 @@ public class SilkRoad {
     /** Reinicia toda la simulación a su estado inicial. */
     public void reboot() {
         stores.clear();
-        robots.clear();
+        // limpiar visualmente y estructura de robots
         for (Cell c : cells) if (c != null) c.clear();
+        robots.clear();
+
         profitToday = 0;
-        profitBar.updateProfit(0);
+        if (profitBar != null) profitBar.updateProfit(0);
 
         // Restaurar tiendas
         for (Map.Entry<Integer, Integer> e : initialStoreTenges.entrySet()) {
@@ -201,6 +221,8 @@ public class SilkRoad {
         }
 
         // Restaurar robots
+        police = null;
+        policeActive = false;
         for (Map.Entry<Integer, String> e : initialRobotColors.entrySet()) {
             int loc = e.getKey();
             String color = e.getValue();
@@ -231,38 +253,102 @@ public class SilkRoad {
         }
         if (robot == null) return;
 
+        // Si el robot es RobotNeverBack y el movimiento es hacia atrás, no hacer nada.
+        String classNameCheck = robot.getClass().getSimpleName();
+        if (classNameCheck.equals("RobotNeverBack") && meters < 0) {
+            // No se permite retroceder para este tipo de robot.
+            return;
+        }
+
         int oldPos = robot.getCurrentLocation();
         int newPos = oldPos + meters;
         if (newPos < 0 || newPos >= length) return;
 
+        // Si quien se mueve es el policía, verificar eliminación en destino antes de mover
+        if (robot == police) {
+            Robot target = robots.get(newPos);
+            if (target == null) {
+                // también buscar por currentLocation si no está bajo la key newPos
+                for (Map.Entry<Integer, Robot> e : robots.entrySet()) {
+                    Robot r = e.getValue();
+                    if (r != null && r.getCurrentLocation() == newPos) {
+                        target = r;
+                        break;
+                    }
+                }
+            }
+            if (target != null && target.getTenges() < 0) {
+                // eliminar objetivo y contar eliminación
+                removeRobotAtPosition(newPos);
+                if (police != null) police.addElimination();
+            }
+        }
+
+        // Ocultar origen y limpiar visualmente
         robot.makeInvisible();
         if (cells[oldPos] != null) cells[oldPos].clear();
 
+        // Actualizar ubicación interna
         robot.move(meters);
+        robot.setCurrentLocation(newPos);
+
+        // Si en destino hay aún un robot (no eliminado), eliminarlo antes de colocar al que se mueve
+        Robot destRobot = robots.get(newPos);
+        if (destRobot == null) {
+            for (Map.Entry<Integer, Robot> e : robots.entrySet()) {
+                Robot r = e.getValue();
+                if (r != null && r.getCurrentLocation() == newPos && r != robot) {
+                    destRobot = r;
+                    break;
+                }
+            }
+        }
+        if (destRobot != null && destRobot != robot) {
+            removeRobotAtPosition(newPos);
+        }
+
+        // Colocar visualmente en nueva celda
         if (cells[newPos] != null) {
             robot.placeInCell(cells[newPos]);
             robot.makeVisible();
         }
 
-        robots.remove(oldPos);
+        // Asegurar que el mapa `robots` tenga la entrada correcta (key = newPos)
+        Iterator<Map.Entry<Integer, Robot>> it = robots.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<Integer, Robot> e = it.next();
+            if (e.getValue() == robot) {
+                it.remove();
+                break;
+            }
+        }
         robots.put(newPos, robot);
 
+        // Interacción con tienda y ganancia (igual que antes, respetando RobotTender)
         int distancia = Math.abs(newPos - oldPos);
         int ganancia;
-
         Store store = stores.get(newPos);
         if (store != null && !store.isEmptiedToday()) {
-            ganancia = store.getCurrentTenges() - distancia;
-            store.empty();
+            String className = robot.getClass().getSimpleName();
+            if (className.equals("RobotTender")) {
+                RobotTender tender = (RobotTender) robot;
+                ganancia = tender.interactWithStore(store, distancia);
+            } else {
+                ganancia = store.getCurrentTenges() - distancia;
+                store.empty();
+            }
         } else {
             ganancia = -distancia;
         }
 
         profitToday += ganancia;
-        profitBar.updateProfit(Math.max(0, profitToday));
+        if (profitBar != null) profitBar.updateProfit(Math.max(0, profitToday));
+        
+        // Evita doble suma de ganancia 
+        if (!robot.getClass().getSimpleName().equals("RobotTender")) {
+            robot.addProfit(ganancia, newPos, distancia);
+        }
 
-        robot.addProfit(ganancia, newPos, distancia);
-        robot.setOrderOfArrival(arrivalCounter++);
     }
 
     /** Ejecuta una lista de movimientos. */
@@ -282,7 +368,7 @@ public class SilkRoad {
     private void actualizarMaxProfit() {
         int max = 0;
         for (Store s : stores.values()) max += s.getCurrentTenges();
-        profitBar.setMaxProfit(max);
+        if (profitBar != null) profitBar.setMaxProfit(max);
     }
 
     public int[][] emptiedStores() {
@@ -382,26 +468,57 @@ public class SilkRoad {
 
     public void highlightBestRobot() {
         if (robots.isEmpty()) return;
+    
         Robot best = null;
         int maxProfit = Integer.MIN_VALUE;
+    
         for (Robot r : robots.values()) {
+            if (r == null) continue;
+            // Ignorar al robot police (color cyan)
+            if (r.getColor().equalsIgnoreCase("cyan")) continue;
+    
             int p = r.getProfit();
             if (p > maxProfit) {
                 maxProfit = p;
                 best = r;
             }
         }
+    
         if (best != null) best.blink();
     }
 
+
     public void finish() {
-        for (Cell c : cells) if (c != null) c.makeInvisible();
-        stores.clear();
+        // Primero eliminar todos los robots visual y lógicamente
+        for (Robot r : robots.values()) {
+            if (r != null) {
+                r.makeInvisible();
+            }
+        }
         robots.clear();
+    
+        // Luego eliminar todas las tiendas visual y lógicamente
+        for (Store s : stores.values()) {
+            if (s != null) {
+                s.makeInvisible();
+            }
+        }
+        stores.clear();
+    
+        // Limpiar visualmente todas las celdas del tablero
+        for (Cell c : cells) {
+            if (c != null) {
+                c.clear();
+                c.makeInvisible();
+            }
+        }
+    
+        // Reiniciar contadores y ganancias
         profitToday = 0;
         profitBar.updateProfit(0);
         visible = false;
     }
+
 
     public boolean ok() {
         return lastOk;
@@ -429,16 +546,6 @@ public class SilkRoad {
         police.makeVisible();
         policeActive = true;
     }
-
-    /**
-     * Hace que el robot policial se mueva y patrulle.
-     * Si encuentra robots con tenges negativos en su misma posición, los elimina.
-     */
-    public void policePatrol() {
-        if (!policeActive || police == null) return;
-        police.patrolMove(this);  // se mueve aleatoriamente
-        police.patrol(this);      // busca y elimina robots negativos
-    }
     
     /**
      * Devuelve cuántos robots ha eliminado el robot policial.
@@ -446,6 +553,34 @@ public class SilkRoad {
     public int getRobotsRemovedByPolice() {
         if (police == null) return 0;
         return police.getRobotsRemoved();
+    }
+    
+    /**
+     * Elimina un robot en la posición indicada, si existe.
+     * Limpia la celda visualmente y la deja en blanco.
+     */
+    public void removeRobotAtPosition(int position) {
+        if (position < 0 || position >= length) return;
+    
+        Iterator<Map.Entry<Integer, Robot>> it = robots.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<Integer, Robot> e = it.next();
+            Robot r = e.getValue();
+            if (r != null && r.getCurrentLocation() == position) {
+                r.makeInvisible();
+                it.remove();
+                break;
+            }
+        }
+    
+        if (cells[position] != null) {
+            cells[position].clear();
+            cells[position].makeVisible();
+        }
+    }
+
+    public Map<Integer, Robot> getRobotsMap() {
+    return robots;
     }
 
 }

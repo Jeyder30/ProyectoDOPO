@@ -161,4 +161,8 @@ public class Store {
     public String toString() {
         return "Store{loc=" + location + ", current=" + currentTenges + ", timesEmptied=" + timesEmptied + "}";
     }
+    
+    public void reduceTengesByHalf() {
+    currentTenges = currentTenges / 2;
+    }
 }

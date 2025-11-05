@@ -93,6 +93,8 @@ public class Canvas {
             case "green" -> graphic.setColor(Color.green);
             case "magenta" -> graphic.setColor(Color.magenta);
             case "white" -> graphic.setColor(Color.white);
+            case "orange" -> graphic.setColor(Color.orange);
+            case "cyan" -> graphic.setColor(Color.cyan);
             case "gray" -> graphic.setColor(Color.gray);
             case "lightGray" -> graphic.setColor(Color.lightGray);
             case "darkGray" -> graphic.setColor(Color.darkGray);

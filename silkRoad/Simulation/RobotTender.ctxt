@@ -1,9 +1,8 @@
 #BlueJ class context
 comment0.target=RobotTender
-comment1.params=location\ color
+comment1.params=position\ color
 comment1.target=RobotTender(int,\ java.lang.String)
 comment2.params=store\ distance
 comment2.target=int\ interactWithStore(Store,\ int)
-comment3.params=
-comment3.target=java.lang.String\ toString()
-numComments=4
+comment2.text=\r\n\ El\ RobotTender\ toma\ solo\ la\ mitad\ de\ los\ tenges\ disponibles\ en\ la\ tienda.\r\n\ La\ tienda\ conserva\ la\ otra\ mitad\ \r\n\ \r\n\ @param\ store\ \ \ \ \ La\ tienda\ con\ la\ que\ interact\u00FAa.\r\n\ @param\ distance\ \ La\ distancia\ recorrida\ para\ llegar\ a\ la\ tienda.\r\n\ @return\ \ \ \ \ \ \ \ \ \ La\ ganancia\ obtenida.\r\n
+numComments=3

@@ -1,5 +1,6 @@
 #BlueJ class context
 comment0.target=Main
+comment0.text=\r\n\ Clase\ Main\:\ punto\ de\ entrada\ de\ la\ simulaci\u00F3n\ Silk\ Road.\r\n\ \r\n\ Lee\ los\ datos\ desde\ entrada\ est\u00E1ndar\:\r\n\ \ -\ n\:\ n\u00FAmero\ de\ d\u00EDas\r\n\ \ -\ luego,\ para\ cada\ d\u00EDa,\ una\ secuencia\ de\ enteros\ (tipo\ y\ posiciones)\r\n\ \r\n\ Ejecuta\ la\ simulaci\u00F3n\ usando\ SilkRoadContest\ y\ muestra\ los\ resultados.\r\n
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
 numComments=2

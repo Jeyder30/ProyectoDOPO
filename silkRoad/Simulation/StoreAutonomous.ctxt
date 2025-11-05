@@ -1,7 +1,11 @@
 #BlueJ class context
 comment0.target=StoreAutonomous
-comment1.params=location\ tenges\ color
+comment1.params=ignoredLocation\ tenges\ color
 comment1.target=StoreAutonomous(int,\ int,\ java.lang.String)
+comment1.text=\r\n\ Crea\ una\ tienda\ aut\u00F3noma\ que\ se\ ubica\ aleatoriamente\ en\ el\ mapa.\r\n\ @param\ ignoredLocation\ se\ ignora\ (para\ compatibilidad)\r\n\ @param\ tenges\ cantidad\ inicial\ de\ dinero\r\n\ @param\ color\ color\ de\ la\ tienda\r\n
 comment2.params=
-comment2.target=java.lang.String\ toString()
-numComments=3
+comment2.target=int\ generateRandomLocation()
+comment2.text=\r\n\ Genera\ una\ ubicaci\u00F3n\ aleatoria\ dentro\ de\ la\ longitud\ total\ del\ mapa.\r\n\ Usa\ SilkRoad.defaultLength\ para\ evitar\ desbordes\ si\ no\ hay\ un\ mapa\ a\u00FAn.\r\n
+comment3.params=
+comment3.target=java.lang.String\ toString()
+numComments=4
