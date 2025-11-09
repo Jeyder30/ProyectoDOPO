@@ -31,9 +31,30 @@ public class SilkRoadContestPoliceTest {
     public void policeIntegrationShouldKeepAllVisible() {
         SilkRoad road = new SilkRoad(20);
         road.placeStore(5, 40, "fighter");
-        road.placeRobot(3, "tender");
-        road.placeRobot(7, "neverback");
-        road.placeRobot(10, "normal");
+        try
+        {
+            road.placeRobot(3, "tender");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
+        try
+        {
+            road.placeRobot(7, "neverback");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
+        try
+        {
+            road.placeRobot(10, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
 
         RobotPolice police = new RobotPolice(0, "black");
         police.makeVisible();

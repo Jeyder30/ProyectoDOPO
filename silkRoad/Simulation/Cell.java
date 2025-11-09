@@ -3,8 +3,11 @@ package Simulation;
 
 import Shapes.*;
 /**
- * Representa una celda en la ruta de SilkRoad.
- * Puede estar vacía, contener una tienda o un robot.
+ * Representa una celda dentro del recorrido de SilkRoad.
+ * Cada celda puede estar vacía, contener una tienda o un robot.
+ * Visualmente se dibuja como un rectángulo con borde negro marco
+ * y un fondo blanco interno. Si tiene contenido, se superpone un
+ * círculo robot o un rectángulo más pequeño tienda.
  */
 public class Cell {
     private Rectangle marco;       // rectángulo negro grande
@@ -19,7 +22,12 @@ public class Cell {
     private static final int DEFAULT_RECT_Y = 15;
     private static final int DEFAULT_CIRCLE_X = 20;
     private static final int DEFAULT_CIRCLE_Y = 15;
-
+    
+    /**
+     * Construye una celda con posición y tamaño definidos.
+     * Se crean dos rectángulos: uno negro para el borde marco
+     * y otro blanco ligeramente más pequeño para el fondo.
+     */
     public Cell(int x, int y, int size) {
         this.x = x;
         this.y = y;
@@ -40,7 +48,11 @@ public class Cell {
         fondo.moveVertical((y + 2) - DEFAULT_RECT_Y);
     }
 
-    /** Coloca un robot en el centro de la celda */
+    /**
+     * Coloca un robot en el centro de la celda.
+     * Si la celda ya tenía contenido, primero se limpia.
+     * El robot se representa como un círculo de color definido.
+     */
     public void placeRobot(String color) {
         clear();
         int bodySize = (int)(size * 0.7);
@@ -59,7 +71,11 @@ public class Cell {
         if (visible) robotCircle.makeVisible();
     }
 
-    /** Coloca una tienda en el centro de la celda */
+    /**
+     * Coloca una tienda en el centro de la celda.
+     * Si la celda ya tenía contenido, se limpia antes.
+     * La tienda se representa como un rectángulo de color definido.
+     */
     public void placeStore(String color) {
         clear();
         int storeSize = (int)(size * 0.6);
@@ -78,7 +94,11 @@ public class Cell {
         if (visible) storeRect.makeVisible();
     }
 
-    /** Limpia la celda (vuelve a vacía) */
+    /**
+     * Limpia el contenido de la celda.
+     * Si hay un robot o una tienda, los elimina visualmente
+     * y libera sus referencias.
+     */
     public void clear() {
         if (robotCircle != null) {
             robotCircle.makeInvisible();
@@ -90,7 +110,11 @@ public class Cell {
         }
     }
 
-    /** Hace visible la celda */
+    /**
+     * Muestra la celda en pantalla junto con su contenido actual.
+     * Primero se dibuja el marco negro, luego el fondo blanco,
+     * y finalmente el contenido si lo hay.
+     */
     public void makeVisible() {
         marco.makeVisible();         // primero marco negro
         fondo.makeVisible();         // luego fondo blanco encima
@@ -99,7 +123,10 @@ public class Cell {
         visible = true;
     }
 
-    /** Hace invisible la celda */
+    /**
+     * Oculta completamente la celda de la pantalla.
+     * Se desactivan todos los elementos gráficos asociados.
+     */
     public void makeInvisible() {
         if (robotCircle != null) robotCircle.makeInvisible();
         if (storeRect != null) storeRect.makeInvisible();
@@ -108,7 +135,7 @@ public class Cell {
         visible = false;
     }
 
-    // Getters
+    // Métodos de acceso a las coordenadas y tamaño
     public int getX() { return x; }
     public int getY() { return y; }
     public int getSize() { return size; }

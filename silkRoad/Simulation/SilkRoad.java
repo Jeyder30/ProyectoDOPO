@@ -4,12 +4,14 @@ import Shapes.*;
 import java.util.*;
 
 /**
- * Clase SilkRoad requisitos DOPO (Ciclo 4 refactorizado).
+ * Clase principal que representa la simulación visual de la Ruta de la Seda (SilkRoad).
  *
- * Esta clase se encarga EXCLUSIVAMENTE de la simulación visual:
- * - Maneja la ruta, los robots y las tiendas.
- * - Ejecuta los movimientos que YA fueron calculados por SilkRoadContest.
- * - No resuelve la maratón ni realiza optimización dinámica (DP).
+ * Se encarga exclusivamente de los aspectos visuales de la simulación:
+ * - Muestra las celdas, tiendas y robots en pantalla.
+ * - Controla los movimientos de los robots y su interacción con las tiendas.
+ * - Administra un robot de policía que elimina robots con tenges negativos.
+ * Importante: Esta clase NO realiza cálculos de optimización o lógica de maratón.
+ * Es el motor gráfico y lógico de visualización de los resultados calculados en SilkRoadContest.
  */
 public class SilkRoad {
 
@@ -41,7 +43,8 @@ public class SilkRoad {
 
 
     /**
-     * Crea una nueva ruta de seda con una longitud fija.
+     * Crea una nueva ruta de seda visual con una longitud dada.
+     * Construye un recorrido en espiral dentro de una cuadrícula visible.
      */
     public SilkRoad(int length) {
         this.length = length;
@@ -59,13 +62,18 @@ public class SilkRoad {
         }
     }
 
-    /** 
-     * Crea la ruta de seda a partir de la entrada del problema. 
+    /**
+     * Crea una ruta de seda a partir de los datos de días del problema.
+     * Calcula automáticamente la longitud necesaria según los eventos.
      */
     public SilkRoad(int[][] days) {
         this(computeLengthFromDays(days));
     }
-
+    
+    /**
+     * Calcula la longitud mínima necesaria para representar todas las posiciones
+     * según los eventos cargados desde la entrada del problema.
+     */
     private static int computeLengthFromDays(int[][] days) {
         if (days == null) return defaultLength;
         long maxLoc = 0;
@@ -80,7 +88,10 @@ public class SilkRoad {
         return (int) needed;
     }
 
-    /** Coloca una tienda en la ubicación indicada. */
+    /**
+     * Coloca una tienda en la posición indicada dentro del camino.
+     * Si el tipo es "autonomous", la posición se elige aleatoriamente.
+     */
     public void placeStore(int position, int tenges, String type) {
         // Si la posición está fuera del rango, se ignora
         if (position < 0 || position >= cells.length) return;
@@ -122,9 +133,15 @@ public class SilkRoad {
         stores.put(position, store);
     }
 
-    /** Coloca un robot en la ubicación indicada. */
-    public void placeRobot(int position, String type) {
-        if (position < 0 || position >= cells.length) return;
+    /**
+     * Coloca un robot en la posición indicada y lo muestra en pantalla.
+     * Soporta distintos tipos de robots, incluyendo el RobotPolice.
+     */
+    public void placeRobot(int position, String type) throws SilkRoadException {
+        if (position < 0 || position >= cells.length) {
+        throw new SilkRoadException(
+            "Intento de colocar un robot fuera del camino (posición " + position + ").");
+        }
     
         Robot robot;
         String color;
@@ -153,13 +170,22 @@ public class SilkRoad {
                 robot = new Robot(position, color);
                 break;
         }
+        Cell cell = cells[position];
+        
+        if (cell == null) {
+            throw new SilkRoadException(
+                "No se puede pintar el robot porque la celda en posición " + position + " es nula o inexistente.");
+        }
     
-        robot.placeInCell(cells[position]);
+        robot.placeInCell(cell);
         robot.makeVisible();
         robots.put(position, robot);
     }
 
-    /** Elimina una tienda existente. */
+    /**
+     * Elimina una tienda en una posición específica.
+     * Limpia la celda visualmente y actualiza la barra de ganancias.
+     */
     public void removeStore(int location) {
         Store s = stores.remove(location);
         if (s != null) {
@@ -169,7 +195,9 @@ public class SilkRoad {
         actualizarMaxProfit();
     }
 
-    /** Elimina un robot existente. */
+    /**
+     * Elimina un robot de una posición dada. Si es el policía, se desactiva.
+     */
     public void removeRobot(int location) {
         Robot r = robots.remove(location);
         if (r != null) {
@@ -186,18 +214,24 @@ public class SilkRoad {
         }
     }
 
-    /** Restablece el contenido de las tiendas. */
+    /**
+     * Rellena nuevamente todas las tiendas.
+     */
     public void resupplyStores() {
         for (Store s : stores.values()) s.resupply();
         actualizarMaxProfit();
     }
 
-    /** Devuelve los robots a sus posiciones iniciales. */
+    /**
+     * Devuelve todos los robots a sus posiciones originales.
+     */
     public void returnRobots() {
         for (Robot r : robots.values()) r.resetPosition();
     }
 
-    /** Reinicia toda la simulación a su estado inicial. */
+    /**
+     * Reinicia toda la simulación a su estado inicial, limpiando y restaurando.
+     */
     public void reboot() {
         stores.clear();
         // limpiar visualmente y estructura de robots
@@ -238,7 +272,12 @@ public class SilkRoad {
         actualizarMaxProfit();
     }
 
-    /** Mueve un robot una cantidad de metros, actualizando su ganancia. */
+    /**
+     * Mueve un robot una cantidad específica de metros en la ruta.
+     * También calcula las ganancias o pérdidas resultantes.
+     * Si el robot es el policía, elimina cualquier robot con tenges negativos
+     * en su destino antes de moverse.
+     */
     public void moveRobot(int location, int meters) {
         Robot robot = robots.get(location);
 
@@ -351,7 +390,6 @@ public class SilkRoad {
 
     }
 
-    /** Ejecuta una lista de movimientos. */
     public void moveRobots(List<int[]> movimientos) {
         if (movimientos == null) return;
         for (int[] mov : movimientos) {
@@ -536,8 +574,8 @@ public class SilkRoad {
     }
     
     /**
-     * Activa un RobotPolice en la ruta.
-     * Por defecto inicia en la celda 0 y se hace visible.
+     * Activa un robot policía en la celda inicial.
+     * Solo puede haber un policía activo a la vez.
      */
     public void activatePolice() {
         if (policeActive) return;
@@ -556,8 +594,8 @@ public class SilkRoad {
     }
     
     /**
-     * Elimina un robot en la posición indicada, si existe.
-     * Limpia la celda visualmente y la deja en blanco.
+     * Elimina un robot en la posición indicada.
+     * Limpia visualmente la celda y la deja vacía.
      */
     public void removeRobotAtPosition(int position) {
         if (position < 0 || position >= length) return;
@@ -578,7 +616,10 @@ public class SilkRoad {
             cells[position].makeVisible();
         }
     }
-
+    
+    /**
+     * Devuelve el mapa de robots activos en la simulación.
+     */
     public Map<Integer, Robot> getRobotsMap() {
     return robots;
     }

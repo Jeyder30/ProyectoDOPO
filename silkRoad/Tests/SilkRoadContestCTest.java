@@ -25,7 +25,14 @@ public class SilkRoadContestCTest {
     public void accordingCCShouldDetectStoreEmpties() {
         SilkRoad road = new SilkRoad(10);
         road.placeStore(5, 20, "normal");
-        road.placeRobot(0, "normal");
+        try
+        {
+            road.placeRobot(0, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
 
         road.moveRobot(0, 5);
 
@@ -39,7 +46,14 @@ public class SilkRoadContestCTest {
     public void accordingCCShouldTrackRobotGains() {
         SilkRoad road = new SilkRoad(10);
         road.placeStore(4, 15, "normal");
-        road.placeRobot(0, "normal");
+        try
+        {
+            road.placeRobot(0, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
 
         road.moveRobot(0, 4);
 
@@ -53,7 +67,14 @@ public class SilkRoadContestCTest {
     public void accordingCCShouldDifferentiateEmptyStores() {
         SilkRoad road = new SilkRoad(10);
         road.placeStore(3, 10, "normal");
-        road.placeRobot(0, "normal");
+        try
+        {
+            road.placeRobot(0, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
         road.moveRobot(0, 3);
 
         int[][] emptied = road.emptiedStores();
@@ -65,7 +86,14 @@ public class SilkRoadContestCTest {
     public void accordingCCShouldHighlightBestRobot() {
         SilkRoad road = new SilkRoad(10);
         road.placeStore(3, 30, "normal");
-        road.placeRobot(0, "normal");
+        try
+        {
+            road.placeRobot(0, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
         road.moveRobot(0, 3);
 
         road.makeVisible();

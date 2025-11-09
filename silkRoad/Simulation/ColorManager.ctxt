@@ -1,14 +1,15 @@
 #BlueJ class context
 comment0.target=ColorManager
-comment0.text=\r\n\ Clase\ que\ gestiona\ colores\ de\ forma\ c\u00EDclica.\r\n
+comment0.text=\r\n\ Clase\ que\ gestiona\ una\ lista\ de\ colores\ y\ los\ entrega\ de\ forma\ c\u00EDclica.\r\n\ Cada\ vez\ que\ se\ solicita\ un\ color,\ el\ \u00EDndice\ avanza\ al\ siguiente.\r\n\ Cuando\ se\ llega\ al\ final\ de\ la\ lista,\ el\ ciclo\ se\ reinicia\ autom\u00E1ticamente.\r\n
 comment1.params=
 comment1.target=ColorManager()
 comment2.params=
 comment2.target=java.lang.String\ nextColor()
-comment2.text=\r\n\ Retorna\ el\ siguiente\ color\ de\ manera\ c\u00EDclica.\r\n
+comment2.text=\r\n\ Devuelve\ el\ siguiente\ color\ del\ arreglo.\r\n\ Si\ se\ llega\ al\ final\ de\ la\ lista\ de\ colores,\r\n\ el\ ciclo\ vuelve\ a\ empezar\ desde\ el\ primer\ color.\r\n
 comment3.params=
 comment3.target=void\ reset()
 comment3.text=\r\n\ Permite\ reiniciar\ el\ ciclo\ de\ colores.\r\n
 comment4.params=
 comment4.target=int\ getIndex()
+comment4.text=\r\n\ Retorna\ el\ \u00EDndice\ actual\ dentro\ del\ ciclo\ de\ colores.\r\n
 numComments=5

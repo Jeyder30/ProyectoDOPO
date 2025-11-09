@@ -13,9 +13,23 @@ public class SilkRoadPoliceCollaborationTest {
     public void policeShouldRemoveRobotsWithNegativeTenges() {
         SilkRoad road = new SilkRoad(30);
 
-        // Colocar robots
+        try
+        {
+            // Colocar robots
         road.placeRobot(5, "normal");
-        road.placeRobot(10, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
+        try
+        {
+            road.placeRobot(10, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
 
         // Forzar al robot 10 a quedar con tenges negativos (simulamos pérdida)
         Robot r = new Robot(10, "red");
@@ -43,9 +57,30 @@ public class SilkRoadPoliceCollaborationTest {
         Robot r2 = new Robot(8, "blue");
         Robot r3 = new Robot(12, "green");
 
-        road.placeRobot(5, "normal");
-        road.placeRobot(8, "normal");
-        road.placeRobot(12, "normal");
+        try
+        {
+            road.placeRobot(5, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
+        try
+        {
+            road.placeRobot(8, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
+        try
+        {
+            road.placeRobot(12, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
 
         RobotPolice police = new RobotPolice(0, "black");
         police.patrol(road);

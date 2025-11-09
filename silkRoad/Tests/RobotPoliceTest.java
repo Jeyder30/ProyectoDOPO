@@ -17,14 +17,6 @@ public class RobotPoliceTest {
     }
 
     @Test
-    public void policeShouldMoveFreelyWithoutError() {
-        SilkRoad road = new SilkRoad(30);
-        RobotPolice police = new RobotPolice(10, "blue");
-        police.patrolMove(road); // no debe lanzar excepción
-        assertTrue("RobotPolice debe poder moverse", police.getCurrentLocation() >= 0);
-    }
-
-    @Test
     public void policeShouldBeVisibleWhenPlacedInCell() {
         SilkRoad road = new SilkRoad(20);
         RobotPolice police = new RobotPolice(5, "gray");

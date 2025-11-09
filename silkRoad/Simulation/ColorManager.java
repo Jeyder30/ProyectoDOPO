@@ -3,7 +3,9 @@ package Simulation;
 
 import Shapes.*;
 /**
- * Clase que gestiona colores de forma cíclica.
+ * Clase que gestiona una lista de colores y los entrega de forma cíclica.
+ * Cada vez que se solicita un color, el índice avanza al siguiente.
+ * Cuando se llega al final de la lista, el ciclo se reinicia automáticamente.
  */
 public class ColorManager {
 
@@ -15,8 +17,10 @@ public class ColorManager {
         index = 0;
     }
 
-    /**
-     * Retorna el siguiente color de manera cíclica.
+     /**
+     * Devuelve el siguiente color del arreglo.
+     * Si se llega al final de la lista de colores,
+     * el ciclo vuelve a empezar desde el primer color.
      */
     public String nextColor() {
         String color = colors[index];
@@ -33,7 +37,10 @@ public class ColorManager {
     public void reset() {
         index = 0;
     }
-
+    
+    /**
+     * Retorna el índice actual dentro del ciclo de colores.
+     */
     public int getIndex() {
         return index;
     }

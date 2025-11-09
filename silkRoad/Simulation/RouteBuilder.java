@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Construye un recorrido en espiral dentro de una cuadrícula.
+ * Clase que construye un recorrido en espiral dentro de una cuadrícula.
+ * El recorrido comienza desde la esquina superior izquierda y se expande
+ * en espiral hacia el centro, generando una lista de objetos Cell con sus
+ * coordenadas en pantalla.
  */
 public class RouteBuilder {
     /**

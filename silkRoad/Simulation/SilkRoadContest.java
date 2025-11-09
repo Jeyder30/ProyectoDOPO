@@ -2,6 +2,7 @@ package Simulation;
 
 import Shapes.*;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 /**
  * Clase SilkRoadContest — Controlador principal de la simulación y resolución.
@@ -100,16 +101,25 @@ public class SilkRoadContest {
 
             // --- Procesar eventos del día ---
             if (event[0] == 1) {
-                // Formato: [1, pos] o [1, pos, tipo]
+            // Formato: [1, pos] o [1, pos, tipo]
+            try {
                 if (event.length >= 3) {
                     String type = decodeRobotType(event[2]);
                     road.placeRobot(event[1], type);
                 } else {
                     road.placeRobot(event[1], "normal");
                 }
-            } 
+            } catch (SilkRoadException e) {
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "No se puede colocar el robot fuera del tablero.\n" + e.getMessage(),
+                        "Error de colocación",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                }
+            }
+ 
             else if (event[0] == 2) {
-                // Formato: [2, pos, tenges] o [2, pos, tenges, tipo]
                 if (event.length >= 4) {
                     String type = decodeStoreType(event[3]);
                     road.placeStore(event[1], event[2], type);

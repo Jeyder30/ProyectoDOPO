@@ -1,18 +1,22 @@
 #BlueJ class context
 comment0.target=RobotPolice
-comment0.text=\r\n\ RobotPolice\ \u2014\ patrulla\ la\ ruta\ de\ seda\ buscando\ robots\ con\ tenges\ negativos.\r\n\ No\ se\ mueve\ autom\u00E1ticamente\ por\ hilos;\ puede\ moverse\ mediante\ moveRobot()\r\n\ o\ mediante\ policePatrol()\ que\ llama\ a\ patrolMove/patrol\ manualmente.\r\n
+comment0.text=\r\n\ Representa\ al\ robot\ de\ polic\u00EDa\ encargado\ de\ patrullar\ la\ Ruta\ de\ la\ Seda.\r\n\ Su\ funci\u00F3n\ principal\ es\ eliminar\ robots\ que\ tengan\ una\ cantidad\ negativa\ de\ tenges.\r\n\ El\ RobotPolice\ no\ se\ mueve\ autom\u00E1ticamente\ mediante\ hilos,\ sino\ que\ puede\ moverse\r\n\ de\ forma\ controlada\ mediante\ los\ m\u00E9todos\ moveRobot()\ o\ policePatrol()\ \r\n\ (que\ a\ su\ vez\ invocan\ el\ m\u00E9todo\ patrol).\r\n
 comment1.params=location\ color
 comment1.target=RobotPolice(int,\ java.lang.String)
+comment1.text=\r\n\ Crea\ un\ RobotPolice\ en\ una\ posici\u00F3n\ inicial\ dentro\ del\ recorrido\r\n\ y\ le\ asigna\ un\ color\ visual.\ \r\n\ Este\ robot\ comienza\ con\ 1000\ tenges\ para\ permitirle\ moverse\ libremente.\r\n
 comment2.params=road
 comment2.target=void\ patrol(SilkRoad)
-comment2.text=\r\n\ Patrulla\ (elimina\ robots\ en\ la\ misma\ posici\u00F3n\ si\ tienen\ tenges\ negativos).\r\n\ Usa\ la\ API\ p\u00FAblica\ de\ SilkRoad\ para\ obtener\ snapshot\ y\ limpiar\ celdas.\r\n
+comment2.text=\r\n\ Patrulla\ la\ celda\ actual\ del\ robot,\ buscando\ otros\ robots\ con\ tenges\ negativos.\r\n\ Si\ encuentra\ un\ robot\ con\ saldo\ negativo\ en\ la\ misma\ posici\u00F3n,\ lo\ elimina\r\n\ tanto\ visualmente\ como\ de\ la\ estructura\ de\ datos\ del\ recorrido\ (SilkRoad).\r\n\ Este\ m\u00E9todo\ no\ mueve\ al\ polic\u00EDa;\ solo\ act\u00FAa\ sobre\ su\ posici\u00F3n\ actual.\r\n
 comment3.params=
 comment3.target=void\ addElimination()
-comment3.text=Incrementa\ el\ contador\ de\ eliminaciones\ (usado\ cuando\ se\ elimina\ por\ moveRobot).
+comment3.text=\r\n\ Incrementa\ manualmente\ el\ contador\ de\ eliminaciones.\r\n\ Este\ m\u00E9todo\ se\ puede\ usar\ si\ un\ robot\ es\ eliminado\ como\ consecuencia\ de\r\n\ otro\ tipo\ de\ acci\u00F3n\ \r\n
 comment4.params=
 comment4.target=int\ getRobotsRemoved()
+comment4.text=\r\n\ Devuelve\ la\ cantidad\ total\ de\ robots\ eliminados\ por\ este\ RobotPolice.\r\n
 comment5.params=cell
 comment5.target=void\ placeInCell(Cell)
+comment5.text=\r\n\ Coloca\ visualmente\ al\ robot\ en\ una\ celda.\r\n\ Este\ m\u00E9todo\ sobrescribe\ la\ versi\u00F3n\ de\ la\ clase\ padre\ (Robot)\ para\ \r\n\ personalizar\ la\ apariencia\ del\ RobotPolice,\ cambiando\ el\ color\r\n\ de\ sus\ ojos\ a\ rojo\ para\ distinguirlo\ de\ los\ dem\u00E1s.\r\n
 comment6.params=
 comment6.target=java.lang.String\ toString()
+comment6.text=\r\n\ Retorna\ una\ descripci\u00F3n\ textual\ del\ RobotPolice,\r\n\ incluyendo\ su\ posici\u00F3n\ actual,\ cantidad\ de\ tenges\ y\ robots\ eliminados.\r\n
 numComments=7

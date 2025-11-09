@@ -33,7 +33,14 @@ public class SilkRoadC2Test {
     // REQ 11 GANANCIA POSITIVA 
     @Test
     public void accordingSSShouldAllowRobotToGainProfit() {
-        road.placeRobot(5, "normal");
+        try
+        {
+            road.placeRobot(5, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
         road.placeStore(10, 30, "normal");
         road.moveRobot(5, 5);
 
@@ -44,7 +51,14 @@ public class SilkRoadC2Test {
 
     @Test
     public void accordingSSShouldNotGainProfitWhenDistanceTooHigh() {
-        road.placeRobot(0, "normal");
+        try
+        {
+            road.placeRobot(0, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
         road.placeStore(20, 10, "normal");
         road.moveRobot(0, 20);
 
@@ -56,7 +70,14 @@ public class SilkRoadC2Test {
     // REQ 12 TIENDAS DESOCUPADAS
     @Test
     public void accordingSSShouldTrackStoreEmptyingCount() {
-        road.placeRobot(0, "normal");
+        try
+        {
+            road.placeRobot(0, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
         road.placeStore(5, 20, "normal");
         road.moveRobot(0, 5);
 
@@ -76,7 +97,14 @@ public class SilkRoadC2Test {
     // REQ 13 GANANCIA POR MOVIMIENTO
     @Test
     public void accordingSSShouldRecordProfitPerMove() {
-        road.placeRobot(0, "normal");
+        try
+        {
+            road.placeRobot(0, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
         road.placeStore(5, 20, "normal");
         road.moveRobot(0, 5);
 
@@ -87,7 +115,14 @@ public class SilkRoadC2Test {
 
     @Test
     public void accordingSSShouldReturnZeroProfitIfNoMoves() {
-        road.placeRobot(0, "normal");
+        try
+        {
+            road.placeRobot(0, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
         int[][] profits = road.profitPerMove();
         assertEquals("Debe existir registro para el robot sin movimientos", 1, profits.length);
         assertEquals("Ganancia inicial debe ser 0", 0, profits[0][1]);
@@ -96,7 +131,14 @@ public class SilkRoadC2Test {
     // REQ VISUAL: TIENDA VACÍA
     @Test
     public void accordingSSShouldMarkStoreAsEmptyAfterVisit() {
-        road.placeRobot(0, "normal");
+        try
+        {
+            road.placeRobot(0, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
         road.placeStore(5, 10, "normal");
         road.moveRobot(0, 5);
 
@@ -108,8 +150,22 @@ public class SilkRoadC2Test {
     // REQ VISUAL MEJOR ROBOT
     @Test
     public void accordingSSShouldIdentifyTopEarningRobot() {
-        road.placeRobot(0, "normal");
-        road.placeRobot(10, "normal");
+        try
+        {
+            road.placeRobot(0, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
+        try
+        {
+            road.placeRobot(10, "normal");
+        }
+        catch (SilkRoadException sre)
+        {
+            sre.printStackTrace();
+        }
         road.placeStore(5, 50, "normal");
         road.moveRobot(0, 5);
 
